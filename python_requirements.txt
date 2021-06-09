@@ -1,0 +1,5 @@
+pandas
+numpy
+flask
+scikit-learn
+xgboost==1.3.3

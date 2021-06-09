@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <title>Customer Churn Predictor </title>
+    <link href='https://fonts.googleapis.com/css?family=Pacifico' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Arimo' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Hind:300' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <link rel="shortcut icon" href="{{url_for('static', filename='favicon.ico')}}">
+    <script src="{{url_for('static', filename='script.js')}}"></script>
+</head>
+
+<body>
+
+    <!-- NavBar -->
+
+    <div class="container">
+        <nav class="navbar navbar-expand-lg fixed-top navbar-dark bg-primary">
+            <a class="navbar-brand center" href="#">Customer Churn Predictor 💸 📈 📉</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="explore">Explore more</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="conclusions">Conclusion</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="about">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="download" download="Analysis_Report">Download Analysis Report</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </div>
+
+
+    <!-- 00000000000000000000000000 -->
+    <div class="login">
+
+
+        <!-- For Filling forms -->
+        <!-- Main Input For Receiving Query to our ML -->
+        <!-- <form action="{{ url_for('predict_churn')}}" method="post"> -->
+        <div class="container" style="position:relative;">
+
+            <br>
+            <h4>Will a customer stay or leave ? </h4>
+
+            <!-- <div style="margin: 8px; border: 1px solid silver; padding: 10px; border-radius:4px; position:relative"> -->
+            <h5>Enter the information and click submit to make a prediction</h5>
+            <br>
+            <!-- <span class="border border-primary"> -->
+            <form name="myForm" action='/result' method='POST'>
+
+                <div class="row">
+                    <div class="col-sm">
+                        <label for="gender">Gender</label>
+                        <select name="gender" id="gender">
+                            <option value="Female">Female</option>
+                            <option value="Male">Male</option>
+                        </select>
+                        <br>
+                        <br>
+
+                        <label for="seniorCitizen">Senior Citizen</label>
+                        <select name="seniorCitizen" id="seniorCitizen">
+                            <option value="No">No</option>
+                            <option value="Yes">Yes</option>
+                        </select>
+                        <br>
+                        <br>
+
+                        <label for="partner">Partner</label>
+                        <select name="partner" id="partner">
+                            <option value="No">No</option>
+                            <option value="Yes">Yes</option>
+                        </select>
+                        <br>
+                        <br>
+
+                        <label for="dependents">Dependents</label>
+                        <select name="dependents" id="dependents">
+                            <option value="No">No</option>
+                            <option value="Yes">Yes</option>
+                        </select>
+                        <br>
+                        <br>
+
+                        <label for="tenure">Tenure</label>
+                        <input type="number" id="tenure" name="tenure" placeholder="0 years to 72 years" min="0"
+                            max="72" required pattern="[0-9]+">
+                        <br>
+                        <br>
+
+                        <label for="phoneService">Phone Service</label>
+                        <select name="phoneService" id="phoneService">
+                            <option value="No">No</option>
+                            <option value="Yes">Yes</option>
+                        </select>
+                        <br>
+                        <br>
+                    </div>
+
+                    <div class="col-sm">
+                        <label for="multipleLines">Multiple Lines</label>
+                        <select name="multipleLines" id="multipleLines">
+                            <option value="No">No</option>
+                            <option value="No phone serive">No phone serive</option>
+                            <option value="Yes">Yes</option>
+                        </select>
+                        <br>
+                        <br>
+
+                        <label for="internetService">Internet Service</label>
+                        <select name="internetService" id="internetService">
+                            <option value="DSL">DSL</option>
+                            <option value="Fiber Optic">Fiber Optic</option>
+                            <option value="No">No</option>
+                        </select>
+                        <br>
+                        <br>
+
+                        <label for="onlineSecurity">Online Security</label>
+                        <select name="onlineSecurity" id="onlineSecurity">
+                            <option value="No">No</option>
+                            <option value="No internet service">No internet service</option>
+                            <option value="Yes">Yes</option>
+                        </select>
+                        <br>
+                        <br>
+
+                        <label for="onlineBackup">Online Backup</label>
+                        <select name="onlineBackup" id="onlineBackup">
+                            <option value="No">No</option>
+                            <option value="No internet service">No internet service</option>
+                            <option value="Yes">Yes</option>
+                        </select>
+                        <br>
+                        <br>
+
+                        <label for="deviceProtection">Device Protection</label>
+                        <select name="deviceProtection" id="deviceProtection">
+                            <option value="No">No</option>
+                            <option value="No internet service">No internet service</option>
+                            <option value="Yes">Yes</option>
+                        </select>
+                        <br>
+                        <br>
+
+                        <label for="techSupport">Tech Support</label>
+                        <select name="techSupport" id="techSupport">
+                            <option value="No">No</option>
+                            <option value="No internet service">No internet service</option>
+                            <option value="Yes">Yes</option>
+                        </select>
+                        <br>
+                        <br>
+                        <label for="streamingTV">Streaming TV</label>
+                        <select name="streamingTV" id="streamingTV">
+                            <option value="No">No</option>
+                            <option value="No internet service">No internet service</option>
+                            <option value="Yes">Yes</option>
+                        </select>
+                        <!-- <br>
+                        <br> -->
+
+                    </div>
+
+                    <div class="col-sm">
+
+                        <label for="streamingmovies">Streaming Movies</label>
+                        <select name="streamingMovies" id="streamingMovies">
+                            <option value="No">No</option>
+                            <option value="No internet service">No internet service</option>
+                            <option value="Yes">Yes</option>
+                        </select>
+                        <br>
+                        <br>
+
+                        <label for="contract">Contract</label>
+                        <select name="contract" id="contract">
+                            <option value="Month-to-month">Month-to-month</option>
+                            <option value="One year">One year</option>
+                            <option value="Two year">Two year</option>
+                        </select>
+                        <br>
+                        <br>
+
+                        <label for="paperlessBilling">Paperless Billing</label>
+                        <select name="paperlessBilling" id="paperlessBilling">
+                            <option value="No">No</option>
+                            <option value="Yes">Yes</option>
+                        </select>
+                        <br>
+                        <br>
+
+                        <label for="paymentMethod">Payment Method</label>
+                        <select name="paymentMethod" id="paymentMethod">
+                            <option value="Bank Transfer (automatic)">Bank Transfer (automatic)</option>
+                            <option value="Credit card (automatic)">Credit card (automatic)</option>
+                            <option value="Electronic Check">Electronic Check</option>
+                            <option value="Mailed Check">Mailed Check</option>
+                        </select>
+                        <br>
+                        <br>
+
+                        <label for="monthlyCharges">Monthly Charges </label>
+                        <input type="number" step="0.01" id="monthlycharges" name="monthlycharges"
+                            placeholder="$0 to $120" required pattern="[0-9]+" min="0" max="120">
+                        <br>
+                        <br>
+
+                        <label for="totalcharges">Total Charges </label>
+                        <input type="number" step="0.01" id="totalCharges" name="totalCharges" placeholder="$1 to $8700"
+                            min="1" max="8700" required>
+                        <!-- <br>
+                        <br> -->
+                    </div>
+                </div>
+
+
+                <div style="width:100%; display: table;">
+
+                    <div style="display: table-row;">
+                        <div class="container" style="display: table-cell; padding-left: 1000px; padding-bottom:20px">
+                            <!-- <input class="btn btn-primary" type="submit" value="Submit"> -->
+                            <button class="btn btn-primary" type="submit">Submit</button>
+                        </div>
+
+
+                        <!-- <div class="container" style="display:table-cell; padding-right: 1000px;">
+                            <a href="explore.html">
+                                <button class="btn btn-primary">Explore more</button>
+                            </a>
+                        </div> -->
+                    </div>
+
+                </div>
+
+            </form>
+            <!-- </div> -->
+            <!-- </span> -->
+        </div>
+    </div>
+
+    <!-- Footer -->
+
+    <br>
+    <footer class="page-footer font-small fixed-bottom dark bottom bg-primary footer-dark">
+
+        <!-- Copyright -->
+        <div class="footer-copyright text-center py-3">© 2021 Copyright:
+            <a href="/" style="color:white;"> Interactive Generation</a>
+        </div>
+        <!-- Copyright -->
+
+    </footer>
+    <!-- Footer -->
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous">
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous">
+    </script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous">
+    </script>
+
+
+</body>
+
+</html>
