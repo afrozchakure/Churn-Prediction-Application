@@ -22,6 +22,6 @@ ADD static static
 ADD templates templates
 ADD model.pkl .
 ADD EDA_and_Conclusion.pdf .
-# RUN python3 -u modelV1.py
+RUN python3 -u model.py
 
 CMD [ "python3", "-u", "./server.py" ]
